@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "microbio",
+    "examples/helloworld"
+]
