@@ -1,5 +1,3 @@
-use microbio;
-
 fn main() {
     let service = microbio::service::new_service();
 

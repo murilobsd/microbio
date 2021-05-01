@@ -1,7 +1,7 @@
-use std::{io, thread, time};
+use std::{fmt, io, thread, time};
 
 /// Trait service
-pub trait Service {
+pub trait Service: fmt::Display {
     /// The service name
     fn name(&self) -> &'static str;
     /// The service init
@@ -27,8 +27,15 @@ impl Service for MicrobioService {
         // sleep
         loop {
             thread::sleep(time::Duration::from_secs(1));
-        };
+        }
+        #[allow(unreachable_code)]
         Ok(())
+    }
+}
+
+impl fmt::Display for MicrobioService {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}", self.name())
     }
 }
 

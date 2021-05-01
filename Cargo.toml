@@ -1,5 +1,6 @@
 [workspace]
 members = [
     "microbio",
-    "examples/helloworld"
+    "mb-server",
+    "examples/helloworld",
 ]
