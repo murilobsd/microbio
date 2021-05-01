@@ -1,3 +1,4 @@
+use crate::options::Options;
 use std::{fmt, io, thread, time};
 
 /// Trait service
@@ -10,7 +11,17 @@ pub trait Service: fmt::Display {
     fn run(&self) -> io::Result<()>;
 }
 
-struct MicrobioService {}
+struct MicrobioService {
+    options: Options,
+}
+
+impl MicrobioService {
+    pub fn new() -> Self {
+        Self {
+            options: Options::new(),
+        }
+    }
+}
 
 impl Service for MicrobioService {
     fn name(&self) -> &'static str {
@@ -27,6 +38,7 @@ impl Service for MicrobioService {
         // sleep
         loop {
             thread::sleep(time::Duration::from_secs(1));
+            self.options.server.start()?;
         }
         #[allow(unreachable_code)]
         Ok(())
@@ -40,7 +52,7 @@ impl fmt::Display for MicrobioService {
 }
 
 pub fn new_service() -> Box<dyn Service> {
-    Box::new(MicrobioService {})
+    Box::new(MicrobioService::new())
 }
 
 #[cfg(test)]
