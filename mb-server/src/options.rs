@@ -1,4 +1,4 @@
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone)]
 pub struct Options {
     id: String,
     name: String,
@@ -28,6 +28,16 @@ impl Options {
 
     pub fn id_mut(&mut self, value: String) {
         self.id = value;
+    }
+}
+
+impl Default for Options {
+    fn default() -> Self {
+        Self {
+            name: "rs.microbio.server".to_string(),
+            address: "127.0.0.1:8080".to_string(),
+            id: "id".to_string(),
+        }
     }
 }
 

@@ -1,14 +1,20 @@
+use std::{fmt, io};
+
 use crate::options::Options;
-use std::{fmt, io, thread, time};
 
 /// Trait service
 pub trait Service: fmt::Display {
     /// The service name
     fn name(&self) -> &'static str;
+
     /// The service init
     fn init(&self);
+
     /// The service run
     fn run(&self) -> io::Result<()>;
+
+    /// The service options
+    fn options(&self) -> &Options;
 }
 
 struct MicrobioService {
@@ -35,13 +41,12 @@ impl Service for MicrobioService {
     // TODO: remove example run server
     fn run(&self) -> io::Result<()> {
         println!("Run service: {}", self.name());
-        // sleep
-        loop {
-            thread::sleep(time::Duration::from_secs(1));
-            self.options.server.start()?;
-        }
-        #[allow(unreachable_code)]
+        self.options.server.start()?;
         Ok(())
+    }
+
+    fn options(&self) -> &Options {
+        &self.options
     }
 }
 

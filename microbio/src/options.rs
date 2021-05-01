@@ -12,6 +12,12 @@ impl Options {
     }
 }
 
+impl Default for Options {
+    fn default() -> Self {
+        Options::new()
+    }
+}
+
 #[cfg(test)]
 mod tests {
 
