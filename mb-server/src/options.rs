@@ -14,11 +14,11 @@ impl Options {
     }
 
     pub fn name_mut(&mut self, value: String) {
-       self.name = value;
+        self.name = value;
     }
 
     pub fn address_mut(&mut self, value: String) {
-       self.address = value;
+        self.address = value;
     }
 }
 
